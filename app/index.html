@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/app.css">
+        <title>Wistia Video Uploader</title>
+    </head>
+
+    <body ng-app="wistia-video-uploader">
+
+        <div class="continer">
+
+            <div class="row justify-content-center">
+                <div class="col-6">
+
+                    <div class="jumbotron jumbotron-fluid mt-5">
+                        <div class="container">
+
+                            <h1 class="display-4">Wistia Video Uploader</h1>
+                            <p class="lead">Use the button below to browse your videos and upload them to Wistia.</p>
+
+                            <div ng-controller="UploadVideoCtrl">
+
+                                <p ng-if="error !== ''" class="text-danger ng-cloak">{{ error}}</p>
+                                <p ng-if="isUploading" class="text-primary ng-cloak">Video is uploading...</p>
+
+                                <div ng-if="isVideoUploaded && embedSrc != ''" class="embed-responsive embed-responsive-16by9 mb-10">
+                                    <iframe class="embed-responsive-item" ng-src="{{embedSrc}}" allowfullscreen></iframe>
+                                </div>
+
+                                <form id="fileupload" action="https://upload.wistia.com" method="POST" enctype="multipart/form-data" data-file-upload="fileUploadoptions">
+                                    <div class="form-group">
+                                        <label class="btn btn-primary btn-block btn-file">
+                                            Upload Video <input type="file" name="file" id="video-upload">
+                                        </label>
+                                    </div>
+                                    <input type="hidden" name="api_password" value="{{ apiPassword}}">
+                                </form>
+
+                                <div class="progress" ng-if="isUploading">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em" ng-style="{'width':(progress + '%')}">
+                                        {{ progress}}%
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+        <!--BOOTSTRAP-->
+        <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!--ANGULAR-->
+        <script src="../node_modules/angular/angular.min.js"></script>
+        <!--blueimp-->
+        <script src="../node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+        <script src="../node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
+        <script src="../node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
+        <script src="../node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+        <script src="../node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+        <script src="../node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
+        <script src="../node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
+        <script src="../node_modules/blueimp-file-upload/js/jquery.fileupload-audio.js"></script>
+        <script src="../node_modules/blueimp-file-upload/js/jquery.fileupload-video.js"></script>
+        <script src="../node_modules/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
+        <script src="../node_modules/blueimp-file-upload/js/jquery.fileupload-angular.js"></script>
+        <!--CUSTOM ANGULAR-->
+        <script src="js/angular/app.js"></script>
+    </body>
+
+</html>
